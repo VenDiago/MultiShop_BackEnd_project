@@ -15,8 +15,9 @@ namespace MultiShop_BackEnd_project.Controllers
         {
             this.context = context;
         }
-        public IActionResult Detail()
+        public IActionResult Detail(int? id)
         {
+            //if (id is null || id == 0) return NotFound();
             return View();
         }
     }

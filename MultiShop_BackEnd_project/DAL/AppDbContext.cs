@@ -14,5 +14,6 @@ namespace MultiShop_BackEnd_project.DAL
 
         }
         public DbSet<Slider>Sliders { get; set; }
+        public DbSet<Ads>Ads{ get; set; }
     }
 }

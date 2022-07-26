@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MultiShop_BackEnd_project.DAL;
 using MultiShop_BackEnd_project.Models;
+using MultiShop_BackEnd_project.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,9 +19,12 @@ namespace MultiShop_BackEnd_project.Controllers
         }
         public IActionResult Index()
         {
-            List<Slider> sliders = context.Sliders.ToList();
-
-            return View(sliders);
+            HomeVM model = new HomeVM
+            {
+                Sliders = context.Sliders.ToList(),
+                Ads = context.Ads.ToList()
+            };
+            return View(model);
         }
      
     }
