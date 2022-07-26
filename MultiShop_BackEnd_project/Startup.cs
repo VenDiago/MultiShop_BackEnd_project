@@ -39,6 +39,7 @@ namespace MultiShop_BackEnd_project
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+             
             }
 
             app.UseRouting();
@@ -46,6 +47,10 @@ namespace MultiShop_BackEnd_project
 
             app.UseEndpoints(endpoints =>
             {
+               endpoints.MapControllerRoute(
+                     name: "areas",
+                     pattern: "{area:exists}/{controller=dashboard}/{action=index}/{id?}"
+                   );
                 endpoints.MapControllerRoute("default","{controller=home}/{action=index}/{id?}");
             });
         }
