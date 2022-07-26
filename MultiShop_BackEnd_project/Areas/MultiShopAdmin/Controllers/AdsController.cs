@@ -11,19 +11,19 @@ using System.Threading.Tasks;
 namespace MultiShop_BackEnd_project.Areas.MultiShopAdmin.Controllers
 {
     [Area("MultiShopAdmin")]
-    public class SliderController : Controller
+    public class AdsController : Controller
     {
         private readonly AppDbContext context;
         private readonly IWebHostEnvironment env;
 
-        public SliderController(AppDbContext context, IWebHostEnvironment env)
+        public AdsController(AppDbContext context, IWebHostEnvironment env)
         {
             this.context = context;
             this.env = env;
         }
         public IActionResult Index()
         {
-            List<Slider> model = context.Sliders.ToList();
+            List<Ads> model = context.Ads.ToList();
             return View(model);
         }
         public IActionResult Create()
@@ -32,34 +32,34 @@ namespace MultiShop_BackEnd_project.Areas.MultiShopAdmin.Controllers
         }
         [HttpPost]
         [AutoValidateAntiforgeryToken]
-        public async Task<IActionResult> Create(Slider slider)
+        public async Task<IActionResult> Create(Ads ads)
         {
             if (!ModelState.IsValid) return View();
-            if (slider.Photo is null)
+            if (ads.Photo is null)
             {
                 ModelState.AddModelError("Photo", "You have to choose 1 image at least");
                 return View();
             }
-            if (!slider.Photo.ContentType.Contains("image/"))
+            if (!ads.Photo.ContentType.Contains("image/"))
             {
                 ModelState.AddModelError("Photo", "Please choose image file");
                 return View();
             }
-            if (slider.Photo.Length / 1024 / 1024 > 2)
+            if (ads.Photo.Length / 1024 / 1024 > 2)
             {
                 ModelState.AddModelError("Photo", "Image size 2MB");
                 return View();
             };
 
-            string filename = string.Concat(Guid.NewGuid(), slider.Photo.FileName);
-            string path = Path.Combine(env.WebRootPath, env.WebRootPath, "assets","img");
+            string filename = string.Concat(Guid.NewGuid(), ads.Photo.FileName);
+            string path = Path.Combine(env.WebRootPath, env.WebRootPath, "assets", "img");
             string filepath = Path.Combine(path, filename);
 
             try
             {
                 using (FileStream stream = new FileStream(filepath, FileMode.Create))
                 {
-                    await slider.Photo.CopyToAsync(stream);
+                    await ads.Photo.CopyToAsync(stream);
 
                 }
             }
@@ -68,53 +68,49 @@ namespace MultiShop_BackEnd_project.Areas.MultiShopAdmin.Controllers
                 throw new FileLoadException();
 
             }
-            slider.Image = filename;
+             ads.Image = filename;
 
-            await context.Sliders.AddAsync(slider);
+            await context.Ads.AddAsync(ads);
             await context.SaveChangesAsync();
 
 
             return RedirectToAction(nameof(Index));
         }
-
         [AutoValidateAntiforgeryToken]
-        public IActionResult Update(int? id, Slider newSlider)
+        public IActionResult Update(int? id, Ads newAds)
         {
             if (id is null || id == 0) return NotFound();
             if (!ModelState.IsValid) return View();
-            Slider existed = context.Sliders.FirstOrDefault(s => s.Id == id);
+            Ads existed = context.Ads.FirstOrDefault(s => s.Id == id);
             if (existed == null) return NotFound();
-            bool duplicate = context.Sliders.Any(s => s.Image == newSlider.Image);
+            bool duplicate = context.Ads.Any(a => a.Image == newAds.Image);
             if (duplicate)
             {
                 ModelState.AddModelError("Photo", "You cannot duplicate photo");
                 return View();
             }
 
-            context.Entry(existed).CurrentValues.SetValues(newSlider);
+            context.Entry(existed).CurrentValues.SetValues(newAds);
             context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
-
         public async Task<IActionResult> Delete(int? id)
         {
             if (id is null || id == 0) return NotFound();
 
-            Slider slider = await context.Sliders.FindAsync(id);
-            if (slider is null) return NotFound();
-            context.Sliders.Remove(slider);
+            Ads ads = await context.Ads.FindAsync(id);
+            if (ads is null) return NotFound();
+            context.Ads.Remove(ads);
             await context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-
         }
         public async Task<IActionResult> Detail(int? id)
         {
             if (id is null || id == 0) return NotFound();
-            //Slider slider = await context.Sliders.FindAsync(id);
-            Slider existed = context.Sliders.FirstOrDefault(s => s.Id == id);
+            Ads existed = context.Ads.FirstOrDefault(a => a.Id == id);
             if (existed is null) return NotFound();
             return View(existed);
-            
+
         }
     }
 }

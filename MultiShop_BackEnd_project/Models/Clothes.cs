@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MultiShop_BackEnd_project.Models
 {
-    public class Product:BaseEntity
+    public class Clothes:BaseEntity
     {
         public string Name { get; set; }
         public decimal Price { get; set; }

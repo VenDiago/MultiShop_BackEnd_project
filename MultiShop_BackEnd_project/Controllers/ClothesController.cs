@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace MultiShop_BackEnd_project.Controllers
 {
-    public class ProductController : Controller
+    public class ClothesController : Controller
     {
         private readonly AppDbContext context;
 
-        public ProductController(AppDbContext context)
+        public ClothesController(AppDbContext context)
         {
             this.context = context;
         }

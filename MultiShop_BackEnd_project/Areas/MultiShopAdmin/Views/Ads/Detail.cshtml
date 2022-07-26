@@ -1,0 +1,58 @@
+﻿@model Ads
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<h1>Detail</h1>
+
+<div class="main-panel" style="width:1500px;">
+    <div class="table-responsive pt-3">
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th>
+                        Id
+                    </th>
+                    <th>
+                        Image
+                    </th>
+                    <th>
+                        Discount
+                    </th>
+                    <th>
+                        Title
+                    </th>
+                    <th>
+                        ButtonUrl
+                    </th>
+                    <th>
+                        Order
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        @Model.Id
+                    </td>
+                    <td>
+                        <img style="width:150px !important; height:150px; object-fit:contain" src="~/assets/img/@Model.Image" alt="">
+                    </td>
+                    <td>
+                        @Model.Title
+                    </td>
+                    <td>
+                        @Model.Discount
+                    </td>
+                    <td>
+                        @Model.ButtonUrl
+                    </td>
+                    <td>
+                        @Model.Order
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
