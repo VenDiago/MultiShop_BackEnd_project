@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MultiShop_BackEnd_project.DAL;
+using MultiShop_BackEnd_project.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,10 +17,17 @@ namespace MultiShop_BackEnd_project.Controllers
         {
             this.context = context;
         }
-        public IActionResult Detail(int? id)
+
+        public async Task<IActionResult> Detail(int? id)
         {
-            //if (id is null || id == 0) return NotFound();
-            return View();
+            if (id is null || id == 0) return NotFound();
+            Clothes clothes = await context.Clothes
+                .Include(c => c.ClothesImages)
+                .Include(c => c.ClothesInfo)
+                .Include(c => c.Categories)
+                .FirstOrDefaultAsync();
+            if (clothes is null) return NotFound();
+            return View(clothes);
         }
     }
 }

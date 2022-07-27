@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MultiShop_BackEnd_project.DAL;
 
 namespace MultiShop_BackEnd_project.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220727081050_createdDbClothesInfotabjhgjhgfjhfgjh")]
+    partial class createdDbClothesInfotabjhgjhgfjhfgjh
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,26 +48,6 @@ namespace MultiShop_BackEnd_project.Migrations
                     b.ToTable("Ads");
                 });
 
-            modelBuilder.Entity("MultiShop_BackEnd_project.Models.Category", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ClothesId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ClothesId");
-
-                    b.ToTable("Categories");
-                });
-
             modelBuilder.Entity("MultiShop_BackEnd_project.Models.Clothes", b =>
                 {
                     b.Property<int>("Id")
@@ -89,7 +71,7 @@ namespace MultiShop_BackEnd_project.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(6,2)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int?>("Quantity")
                         .HasColumnType("int");
@@ -107,32 +89,6 @@ namespace MultiShop_BackEnd_project.Migrations
                     b.ToTable("Clothes");
                 });
 
-            modelBuilder.Entity("MultiShop_BackEnd_project.Models.ClothesImage", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Alternative")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ClothesId")
-                        .HasColumnType("int");
-
-                    b.Property<bool?>("IsMain")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ClothesId");
-
-                    b.ToTable("ClothesImages");
-                });
-
             modelBuilder.Entity("MultiShop_BackEnd_project.Models.ClothesInfo", b =>
                 {
                     b.Property<int>("Id")
@@ -143,34 +99,9 @@ namespace MultiShop_BackEnd_project.Migrations
                     b.Property<string>("AdditionaInformation")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ProductDescription")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.ToTable("ClothesInfos");
-                });
-
-            modelBuilder.Entity("MultiShop_BackEnd_project.Models.Setting", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Key")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Key")
-                        .IsUnique()
-                        .HasFilter("[Key] IS NOT NULL");
-
-                    b.ToTable("Settings");
                 });
 
             modelBuilder.Entity("MultiShop_BackEnd_project.Models.Slider", b =>
@@ -203,29 +134,11 @@ namespace MultiShop_BackEnd_project.Migrations
                     b.ToTable("Sliders");
                 });
 
-            modelBuilder.Entity("MultiShop_BackEnd_project.Models.Category", b =>
-                {
-                    b.HasOne("MultiShop_BackEnd_project.Models.Clothes", "Clothes")
-                        .WithMany("Categories")
-                        .HasForeignKey("ClothesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("MultiShop_BackEnd_project.Models.Clothes", b =>
                 {
                     b.HasOne("MultiShop_BackEnd_project.Models.ClothesInfo", "ClothesInfo")
                         .WithMany("Clothes")
                         .HasForeignKey("ClothesInfoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("MultiShop_BackEnd_project.Models.ClothesImage", b =>
-                {
-                    b.HasOne("MultiShop_BackEnd_project.Models.Clothes", "Clothes")
-                        .WithMany("ClothesImages")
-                        .HasForeignKey("ClothesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

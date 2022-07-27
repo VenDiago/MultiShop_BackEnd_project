@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MultiShop_BackEnd_project.DAL;
 
 namespace MultiShop_BackEnd_project.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220727090116_createSettingtable")]
+    partial class createSettingtable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -120,9 +122,6 @@ namespace MultiShop_BackEnd_project.Migrations
                     b.Property<int>("ClothesId")
                         .HasColumnType("int");
 
-                    b.Property<bool?>("IsMain")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -141,9 +140,6 @@ namespace MultiShop_BackEnd_project.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("AdditionaInformation")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ProductDescription")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

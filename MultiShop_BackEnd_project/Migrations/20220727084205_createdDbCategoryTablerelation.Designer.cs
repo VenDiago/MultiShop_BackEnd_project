@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MultiShop_BackEnd_project.DAL;
 
 namespace MultiShop_BackEnd_project.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220727084205_createdDbCategoryTablerelation")]
+    partial class createdDbCategoryTablerelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -63,7 +65,7 @@ namespace MultiShop_BackEnd_project.Migrations
 
                     b.HasIndex("ClothesId");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Category");
                 });
 
             modelBuilder.Entity("MultiShop_BackEnd_project.Models.Clothes", b =>
@@ -120,9 +122,6 @@ namespace MultiShop_BackEnd_project.Migrations
                     b.Property<int>("ClothesId")
                         .HasColumnType("int");
 
-                    b.Property<bool?>("IsMain")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -130,7 +129,7 @@ namespace MultiShop_BackEnd_project.Migrations
 
                     b.HasIndex("ClothesId");
 
-                    b.ToTable("ClothesImages");
+                    b.ToTable("ClothesImage");
                 });
 
             modelBuilder.Entity("MultiShop_BackEnd_project.Models.ClothesInfo", b =>
@@ -143,34 +142,9 @@ namespace MultiShop_BackEnd_project.Migrations
                     b.Property<string>("AdditionaInformation")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ProductDescription")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.ToTable("ClothesInfos");
-                });
-
-            modelBuilder.Entity("MultiShop_BackEnd_project.Models.Setting", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Key")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Key")
-                        .IsUnique()
-                        .HasFilter("[Key] IS NOT NULL");
-
-                    b.ToTable("Settings");
                 });
 
             modelBuilder.Entity("MultiShop_BackEnd_project.Models.Slider", b =>

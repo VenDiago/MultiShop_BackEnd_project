@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace MultiShop_BackEnd_project.Models
 {
-    public class ClothesInfo:BaseEntity
+    public class Category:BaseEntity
     {
-        public string AdditionaInformation { get; set; }
-        public string ProductDescription { get; set; }
-        public List<Clothes> Clothes { get; set; }
+        public string Name { get; set; }
+        public int ClothesId { get; set; }
+        public Clothes Clothes { get; set; }
 
     }
 }

@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MultiShop_BackEnd_project.DAL;
+using MultiShop_BackEnd_project.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,7 @@ namespace MultiShop_BackEnd_project
             {
                 opt.UseSqlServer(configuration.GetConnectionString("Default"));
             });
+            services.AddScoped<LayoutService>();
 
         }
 

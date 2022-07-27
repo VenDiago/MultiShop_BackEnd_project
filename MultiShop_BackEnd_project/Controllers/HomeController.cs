@@ -22,7 +22,7 @@ namespace MultiShop_BackEnd_project.Controllers
             HomeVM model = new HomeVM
             {
                 Sliders = context.Sliders.ToList(),
-                Ads = context.Ads.ToList()
+                Ads = context.Ads.ToList(),
             };
             return View(model);
         }
