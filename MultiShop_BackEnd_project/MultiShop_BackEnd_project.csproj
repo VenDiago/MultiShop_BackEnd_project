@@ -5,27 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20220727080523_createdDbClothesInfotab.cs" />
-    <Compile Remove="Migrations\20220727080523_createdDbClothesInfotab.Designer.cs" />
-    <Compile Remove="Migrations\20220727080714_createdDbClothesInfotab.cs" />
-    <Compile Remove="Migrations\20220727080714_createdDbClothesInfotab.Designer.cs" />
-    <Compile Remove="Migrations\20220727080842_createdDbClothesInfotab.cs" />
-    <Compile Remove="Migrations\20220727080842_createdDbClothesInfotab.Designer.cs" />
-    <Compile Remove="Migrations\20220727080907_createdDbClothesInfotab.cs" />
-    <Compile Remove="Migrations\20220727080907_createdDbClothesInfotab.Designer.cs" />
-    <Compile Remove="Migrations\20220727133849_ren.cs" />
-    <Compile Remove="Migrations\20220727133849_ren.Designer.cs" />
-    <Compile Remove="Migrations\20220727142817_update.cs" />
-    <Compile Remove="Migrations\20220727142817_update.Designer.cs" />
-    <Compile Remove="Migrations\20220727143619_UpdatedClothesTable.cs" />
-    <Compile Remove="Migrations\20220727143619_UpdatedClothesTable.Designer.cs" />
-    <Compile Remove="Migrations\20220727143804_UpdatedClothesTables.cs" />
-    <Compile Remove="Migrations\20220727143804_UpdatedClothesTables.Designer.cs" />
-    <Compile Remove="Migrations\20220727143910_UpdatedClothesTables.cs" />
-    <Compile Remove="Migrations\20220727143910_UpdatedClothesTables.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.27" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.27" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.27">
