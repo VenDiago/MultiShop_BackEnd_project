@@ -15,14 +15,13 @@ namespace MultiShop_BackEnd_project.Models
         public string Desc { get; set; }
         public string Size { get; set; }
         public string Color { get; set; }
-        public string Category { get; set; }
         public string Tags { get; set; }
 
         public int? Quantity { get; set; }
         public ClothesInfo ClothesInfo{ get; set; }
         public int ClothesInfoId { get; set; }
-        public List<ClothesImage>ClothesImages { get; set; }
-        public List<Category>Categories{ get; set; }
-
+        public List<ClothesImage> ClothesImages { get; set; }
+        public int CategoryId { get; set; }
+        public Category Category { get; set; }
     }
 }

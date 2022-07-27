@@ -10,5 +10,8 @@ namespace MultiShop_BackEnd_project.ViewModels
     {
         public List<Slider>Sliders{ get; set; }
         public List<Ads>Ads { get; set; }
+        public List<Clothes> Clothes { get; set; }
+        public List<Category> Category { get; set; }
+
     }
 }

@@ -23,9 +23,6 @@ namespace MultiShop_BackEnd_project.DAL
 
 
 
-
-
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             foreach (var item in modelBuilder.Model.GetEntityTypes()

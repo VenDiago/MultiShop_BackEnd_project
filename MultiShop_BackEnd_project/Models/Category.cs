@@ -9,8 +9,7 @@ namespace MultiShop_BackEnd_project.Models
     public class Category:BaseEntity
     {
         public string Name { get; set; }
-        public int ClothesId { get; set; }
-        public Clothes Clothes { get; set; }
-
+        public string Image { get; set; }
+        public List<Clothes> Clothes { get; set; }
     }
 }

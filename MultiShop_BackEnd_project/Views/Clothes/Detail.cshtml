@@ -119,12 +119,12 @@
                 <div class="product-category">
                     <span class="title text-dark" style="font-weight:bold;">Categories :</span>
                     <ul style="display:inline; padding-left:0; ">
-                        @foreach(Category category in Model.Categories)
-                         {
+                        @*@foreach(Clothes clo in Model)
+                         {*@
                             <li style="list-style: none;  display: inline;  ">
-                                <a href="#" style="color: black; text-decoration: none;  ">@category.Name</a>
+                                <a href="#" style="color: black; text-decoration: none;  ">@Model.Category.Name</a>
                             </li>
-                         }
+                         @*}*@
                     </ul>
                 </div>
                 <div class="product-category mt-2">

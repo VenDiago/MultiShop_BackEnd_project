@@ -10,8 +10,8 @@ using MultiShop_BackEnd_project.DAL;
 namespace MultiShop_BackEnd_project.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220727120414_20220727083450_createdClothesImageTableandreltion.cs")]
-    partial class _20220727083450_createdClothesImageTableandreltioncs
+    [Migration("20220727132430_20220727120414_20220727083450_createdClothesImageTableandreltion.cs")]
+    partial class _20220727120414_20220727083450_createdClothesImageTableandreltioncs
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -57,6 +57,9 @@ namespace MultiShop_BackEnd_project.Migrations
 
                     b.Property<int>("ClothesId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");

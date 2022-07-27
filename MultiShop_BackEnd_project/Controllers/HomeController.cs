@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MultiShop_BackEnd_project.DAL;
 using MultiShop_BackEnd_project.Models;
 using MultiShop_BackEnd_project.ViewModels;
@@ -23,6 +24,9 @@ namespace MultiShop_BackEnd_project.Controllers
             {
                 Sliders = context.Sliders.ToList(),
                 Ads = context.Ads.ToList(),
+                Clothes=context.Clothes.Include(c=>c.ClothesImages).ToList(),
+                Category=context.Categories.Include(c=>c.Clothes).ToList()
+               
             };
             return View(model);
         }
