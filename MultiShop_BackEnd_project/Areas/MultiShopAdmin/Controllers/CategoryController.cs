@@ -11,47 +11,47 @@ using System.Threading.Tasks;
 namespace MultiShop_BackEnd_project.Areas.MultiShopAdmin.Controllers
 {
     [Area("MultiShopAdmin")]
-    public class AdsController : Controller
+    public class CategoryController : Controller
     {
         private readonly AppDbContext context;
         private readonly IWebHostEnvironment env;
 
-        public AdsController(AppDbContext context, IWebHostEnvironment env)
+        public CategoryController(AppDbContext context, IWebHostEnvironment env)
         {
             this.context = context;
             this.env = env;
         }
         public IActionResult Index()
         {
-            List<Ads> model = context.Ads.ToList();
+            List<Category> model = context.Categories.ToList();
             return View(model);
         }
-        public IActionResult Create()
+        public  IActionResult Create()
         {
             return View();
         }
         [HttpPost]
         [AutoValidateAntiforgeryToken]
-        public async Task<IActionResult> Create(Ads ads)
+        public async Task<IActionResult> Create(Category category)
         {
             if (!ModelState.IsValid) return View();
-            if (ads.Photo is null)
+            if (category.Photo is null)
             {
                 ModelState.AddModelError("Photo", "You have to choose 1 image at least");
                 return View();
             }
-            if (!ads.Photo.ContentType.Contains("image/"))
+            if (!category.Photo.ContentType.Contains("image/"))
             {
                 ModelState.AddModelError("Photo", "Please choose image file");
                 return View();
             }
-            if (ads.Photo.Length / 1024 / 1024 > 2)
+            if (category.Photo.Length / 1024 / 1024 > 2)
             {
                 ModelState.AddModelError("Photo", "Image size 2MB");
                 return View();
             };
 
-            string filename = string.Concat(Guid.NewGuid(), ads.Photo.FileName);
+            string filename = string.Concat(Guid.NewGuid(), category.Photo.FileName);
             string path = Path.Combine(env.WebRootPath, env.WebRootPath, "assets", "img");
             string filepath = Path.Combine(path, filename);
 
@@ -59,58 +59,55 @@ namespace MultiShop_BackEnd_project.Areas.MultiShopAdmin.Controllers
             {
                 using (FileStream stream = new FileStream(filepath, FileMode.Create))
                 {
-                    await ads.Photo.CopyToAsync(stream);
+                    await category.Photo.CopyToAsync(stream);
 
                 }
             }
             catch (Exception)
             {
                 throw new FileLoadException();
-
             }
-             ads.Image = filename;
+            category.Image = filename;
 
-            await context.Ads.AddAsync(ads);
+            await context.Categories.AddAsync(category);
             await context.SaveChangesAsync();
 
 
             return RedirectToAction(nameof(Index));
         }
         [AutoValidateAntiforgeryToken]
-        public IActionResult Update(int? id, Ads newAds)
+        public IActionResult Update(int? id, Category newCategory)
         {
             if (id is null || id == 0) return NotFound();
             if (!ModelState.IsValid) return View();
-            Ads existed = context.Ads.FirstOrDefault(c => c.Id == id);
+            Category existed = context.Categories.FirstOrDefault(c => c.Id == id);
             if (existed == null) return NotFound();
-            bool duplicate = context.Ads.Any(a => a.Image == newAds.Image);
+            bool duplicate = context.Categories.Any(c => c.Image == newCategory.Image); 
             if (duplicate)
             {
                 ModelState.AddModelError("Photo", "You cannot duplicate photo");
                 return View();
             }
 
-            context.Entry(existed).CurrentValues.SetValues(newAds);
+            context.Entry(existed).CurrentValues.SetValues(newCategory);
             context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id is null || id == 0) return NotFound();
 
-            Ads ads = await context.Ads.FindAsync(id);
-            if (ads is null) return NotFound();
-            context.Ads.Remove(ads);
+            Category category = await context.Categories.FindAsync(id);
+            if (category is null) return NotFound();
+            context.Categories.Remove(category);
             await context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-        public async Task<IActionResult> Detail(int? id)
+        public IActionResult Detail()
         {
-            if (id is null || id == 0) return NotFound();
-            Ads existed = context.Ads.FirstOrDefault(a => a.Id == id);
-            if (existed is null) return NotFound();
-            return View(existed);
-
+            return View();
         }
+
     }
 }

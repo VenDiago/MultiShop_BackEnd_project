@@ -26,7 +26,6 @@ namespace MultiShop_BackEnd_project.Controllers
                 Ads = context.Ads.ToList(),
                 Clothes=context.Clothes.Include(c=>c.ClothesImages).ToList(),
                 Category=context.Categories.Include(c=>c.Clothes).ToList()
-               
             };
             return View(model);
         }
