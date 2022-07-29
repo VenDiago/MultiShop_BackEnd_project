@@ -26,7 +26,7 @@ namespace MultiShop_BackEnd_project.Controllers
                 .Include(c => c.ClothesInfo)
                 .Include(c => c.Category)
                 .FirstOrDefaultAsync();
-
+            ViewBag.Clothes = await context.Clothes.Include(c => c.ClothesImages).ToListAsync();
             if (clothes is null) return NotFound();
             return View(clothes);
         }

@@ -1,0 +1,74 @@
+﻿@model Clothes
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<div class="main-panel" >
+    <div class="table-responsive pt-3">
+        <h1>Detail</h1>
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th>
+                        Id
+                    </th>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Price
+                    </th>
+                    <th>
+                        Discount
+                    </th>
+                    <th>
+                        Desc
+                    </th>
+                    <th>
+                        Size
+                    </th>
+                    <th>
+                        Color
+                    </th>
+                    <th>
+                        Tags
+                    </th>
+                    <th>
+                        Quantity
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        @Model.Id
+                    </td>
+                    <td>
+                        @Model.Name
+                    </td>
+                    <td>
+                        @Model.Price
+                    </td>
+                    <td>
+                        @Model.Discount
+                    </td>
+                    <td>
+                        @Model.Desc
+                    </td>
+                    <td>
+                        @Model.Size
+                    </td>
+                    <td>
+                        @Model.Color
+                    </td>
+                    <td>
+                        @Model.Tags
+                    </td>
+                    <td>
+                        @Model.Quantity
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

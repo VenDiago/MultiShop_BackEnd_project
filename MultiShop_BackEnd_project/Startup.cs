@@ -54,7 +54,9 @@ namespace MultiShop_BackEnd_project
                      pattern: "{area:exists}/{controller=dashboard}/{action=index}/{id?}"
                    );
                 endpoints.MapControllerRoute("default","{controller=home}/{action=index}/{id?}");
+                //endpoints.MapControllerRoute("categoryFilter", template: "Clothes/{action}/{category?}");
             });
+           
         }
     }
 }

@@ -19,5 +19,6 @@ namespace MultiShop_BackEnd_project.Controllers
         {
             return View();
         }
+
     }
 }
