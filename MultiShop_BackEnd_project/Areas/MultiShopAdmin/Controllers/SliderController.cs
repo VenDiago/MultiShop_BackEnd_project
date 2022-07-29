@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MultiShop_BackEnd_project.DAL;
 using MultiShop_BackEnd_project.Models;
+using MultiShop_BackEnd_project.Utilities;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -77,21 +78,44 @@ namespace MultiShop_BackEnd_project.Areas.MultiShopAdmin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public IActionResult Update(int? id)
+        {
+            if (id == null || id == 0) return NotFound();
+            Slider slider = context.Sliders.FirstOrDefault(c => c.Id == id);
+            if (slider == null) return NotFound();
+            return View(slider);
+        }
+
+        [HttpPost]
         [AutoValidateAntiforgeryToken]
-        public IActionResult Update(int? id, Slider newSlider)
+        public async Task<IActionResult> Update(int? id, Slider newSlider)
         {
             if (id is null || id == 0) return NotFound();
-            if (!ModelState.IsValid) return View();
+
+
             Slider existed = context.Sliders.FirstOrDefault(s => s.Id == id);
+            if (!ModelState.IsValid) return View(existed);
             if (existed == null) return NotFound();
-            bool duplicate = context.Sliders.Any(s => s.Image == newSlider.Image);
+            bool duplicate = context.Categories.Any(s => s.Id != existed.Id && s.Name == newSlider.Title);
             if (duplicate)
             {
-                ModelState.AddModelError("Photo", "You cannot duplicate photo");
+                ModelState.AddModelError("Name", "You cannot duplicate title");
                 return View();
             }
 
+            //existed.Name = newCategory.Name;
             context.Entry(existed).CurrentValues.SetValues(newSlider);
+            if (newSlider.Photo != null)
+            {
+                if (!newSlider.Photo.ImageIsOkay(2))
+                {
+                    ModelState.AddModelError("Image", "You cannot duplicate image");
+                    return View();
+                }
+                if (existed.Image != null)
+                    FileValidator.FileDelete(env.WebRootPath, "assets/img", existed.Image);
+                existed.Image = await FileValidator.FileCreate(newSlider.Photo, env.WebRootPath, "assets/img");
+            }
             context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }

@@ -5,17 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20220728100613_newPc.cs" />
-    <Compile Remove="Migrations\20220728100613_newPc.Designer.cs" />
-    <Compile Remove="Migrations\20220728100857_20220728100613_newPc.Designer.cs.cs" />
-    <Compile Remove="Migrations\20220728100857_20220728100613_newPc.Designer.cs.Designer.cs" />
-    <Compile Remove="Migrations\20220728101000_newPcv.cs" />
-    <Compile Remove="Migrations\20220728101000_newPcv.Designer.cs" />
-    <Compile Remove="Migrations\20220728102141_20220728101000_newPcv.cs.cs" />
-    <Compile Remove="Migrations\20220728102141_20220728101000_newPcv.cs.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.27" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.27" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.27">

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MultiShop_BackEnd_project.DAL;
 using MultiShop_BackEnd_project.Models;
+using MultiShop_BackEnd_project.Utilities;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -76,21 +77,44 @@ namespace MultiShop_BackEnd_project.Areas.MultiShopAdmin.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+        public IActionResult Update(int? id)
+        {
+            if (id == null || id == 0) return NotFound();
+            Ads ads = context.Ads.FirstOrDefault(c => c.Id == id);
+            if (ads == null) return NotFound();
+            return View(ads);
+        }
+
+        [HttpPost]
         [AutoValidateAntiforgeryToken]
-        public IActionResult Update(int? id, Ads newAds)
+        public async Task<IActionResult> Update(int? id, Ads newAds)
         {
             if (id is null || id == 0) return NotFound();
-            if (!ModelState.IsValid) return View();
+
+
             Ads existed = context.Ads.FirstOrDefault(c => c.Id == id);
+            if (!ModelState.IsValid) return View(existed);
             if (existed == null) return NotFound();
-            bool duplicate = context.Ads.Any(a => a.Image == newAds.Image);
+            bool duplicate = context.Ads.Any(a => a.Id != existed.Id && a.Title == newAds.Title);
             if (duplicate)
             {
-                ModelState.AddModelError("Photo", "You cannot duplicate photo");
+                ModelState.AddModelError("Name", "You cannot duplicate name");
                 return View();
             }
 
+            //existed.Name = newCategory.Name;
             context.Entry(existed).CurrentValues.SetValues(newAds);
+            if (newAds.Photo != null)
+            {
+                if (!newAds.Photo.ImageIsOkay(2))
+                {
+                    ModelState.AddModelError("Image", "You cannot duplicate image");
+                    return View();
+                }
+                if (existed.Image != null)
+                    FileValidator.FileDelete(env.WebRootPath, "assets/img", existed.Image);
+                existed.Image = await FileValidator.FileCreate(newAds.Photo, env.WebRootPath, "assets/img");
+            }
             context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }

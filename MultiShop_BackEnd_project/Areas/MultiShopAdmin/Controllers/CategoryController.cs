@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MultiShop_BackEnd_project.DAL;
 using MultiShop_BackEnd_project.Models;
+using MultiShop_BackEnd_project.Utilities;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -75,21 +76,41 @@ namespace MultiShop_BackEnd_project.Areas.MultiShopAdmin.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+        public IActionResult Update(int? id)
+        {
+            if (id == null || id == 0) return NotFound();
+            Category category = context.Categories.FirstOrDefault(c => c.Id == id);
+            if (category == null) return NotFound();
+            return View(category);
+        }
+        
+        [HttpPost]
         [AutoValidateAntiforgeryToken]
-        public IActionResult Update(int? id, Category newCategory)
+        public async Task<IActionResult> Update(int? id, Category newCategory)
         {
             if (id is null || id == 0) return NotFound();
-            if (!ModelState.IsValid) return View();
+
             Category existed = context.Categories.FirstOrDefault(c => c.Id == id);
+            if (!ModelState.IsValid) return View(existed);
             if (existed == null) return NotFound();
-            bool duplicate = context.Categories.Any(c => c.Image == newCategory.Image); 
+            bool duplicate = context.Categories.Any(c => c.Id!= existed.Id&&c.Name==newCategory.Name);
             if (duplicate)
             {
-                ModelState.AddModelError("Photo", "You cannot duplicate photo");
+                ModelState.AddModelError("Name", "You cannot duplicate name");
                 return View();
             }
-
             context.Entry(existed).CurrentValues.SetValues(newCategory);
+            if (newCategory.Photo != null)
+            {
+                if (!newCategory.Photo.ImageIsOkay(2))
+                {
+                    ModelState.AddModelError("Image", "You cannot duplicate image");
+                    return View();
+                }
+                if (existed.Image != null)
+                    FileValidator.FileDelete(env.WebRootPath, "assets/img", existed.Image);
+                existed.Image = await newCategory.Photo.FileCreate( env.WebRootPath, "assets/img");
+            }
             context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
@@ -104,9 +125,13 @@ namespace MultiShop_BackEnd_project.Areas.MultiShopAdmin.Controllers
             await context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-        public IActionResult Detail()
+        public async Task<IActionResult> Detail(int? id)
         {
-            return View();
+            if (id is null || id == 0) return NotFound();
+            Category existed = context.Categories.FirstOrDefault(a => a.Id == id);
+            if (existed is null) return NotFound();
+            return View(existed);
+
         }
 
     }
