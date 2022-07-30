@@ -24,7 +24,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (Slider slider in Model)
+                @foreach (Slider slider in Model.OrderByDescending(s => s.Id))
                 {
                     <tr>
                         <td>

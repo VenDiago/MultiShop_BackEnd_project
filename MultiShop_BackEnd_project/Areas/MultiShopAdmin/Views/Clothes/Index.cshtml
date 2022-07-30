@@ -10,6 +10,9 @@
             <thead>
                 <tr>
                     <th>
+                        Image
+                    </th>
+                    <th>
                         Name
                     </th>
                     <th>
@@ -24,9 +27,12 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (Clothes clothes in Model)
+                @foreach (Clothes clothes in Model.OrderByDescending(c=>c.Id))
                 {
                 <tr>
+                    <td>
+                        @*@clothes.*@
+                    </td>
                     <td>
                         @clothes.Name
                     </td>

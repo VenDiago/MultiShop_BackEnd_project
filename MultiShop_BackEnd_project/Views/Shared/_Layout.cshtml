@@ -1,5 +1,5 @@
 ﻿@inject MultiShop_BackEnd_project.Service.LayoutService layoutService
-@model List<Category>
+@*@model List<Category>*@
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,8 +45,14 @@
                     <div class="btn-group">
                         <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <button class="dropdown-item" type="button">Sign in</button>
-                            <button class="dropdown-item" type="button">Sign up</button>
+                            <button class="dropdown-item" type="button" asp-controller="account" asp-action="login">Sign in</button>
+                            <ul style="text-decoration: none; list-style: none; padding-left: 0; ">
+                                <li style="text-decoration:none; ">
+                                    <a class="dropdown-item" type="button" asp-controller="account" asp-action="register">Sign up</a>
+                                </li>
+                            </ul>
+                            @*<button class="dropdown-item" type="button" asp-controller="account" asp-action="register">Sign up</button>*@
+
                         </div>
                     </div>
                     <div class="btn-group mx-2">
@@ -82,7 +88,7 @@
             <div class="col-lg-4">
                 <a href="" class="text-decoration-none">
                     <span class="h1 text-uppercase text-primary bg-dark px-2">@layoutService.GetSettings().FirstOrDefault(p => p.Key.Trim().ToLower() == "headerlogo")?.Value</span>
-                    <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">@layoutService.GetSettings().FirstOrDefault(p=>p.Key.Trim().ToLower() == "headerlogo2")?.Value</span>
+                    <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">@layoutService.GetSettings().FirstOrDefault(p => p.Key.Trim().ToLower() == "headerlogo2")?.Value</span>
                 </a>
             </div>
             <div class="col-lg-4 col-6 text-left">
@@ -146,9 +152,9 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
-                            <a  class="nav-item nav-link active" asp-controller="Home" asp-action="Index">Home</a>
-                            <a  class="nav-item nav-link" asp-controller="Shop" asp-action="Index">Shop</a>
-                            <a  class="nav-item nav-link" asp-controller="Clothes" asp-action="Detail">Shop Detail</a>
+                            <a class="nav-item nav-link active" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-item nav-link" asp-controller="Shop" asp-action="Index">Shop</a>
+                            <a class="nav-item nav-link" asp-controller="Clothes" asp-action="Detail" asp-route-id="1">Shop Detail</a>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-angle-down mt-1"></i></a>
                                 <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
@@ -194,7 +200,7 @@
                         <div class="d-flex flex-column justify-content-start">
                             <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
                             <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
-                            <a class="text-secondary mb-2"  ><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
+                            <a class="text-secondary mb-2"><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
                             <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
                             <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
                             <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>

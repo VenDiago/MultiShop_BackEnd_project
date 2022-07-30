@@ -1,13 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MultiShop_BackEnd_project.DAL;
-using MultiShop_BackEnd_project.Models;
 using MultiShop_BackEnd_project.ViewModels;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using X.PagedList;
 
 namespace MultiShop_BackEnd_project.Controllers
 {
@@ -25,8 +20,8 @@ namespace MultiShop_BackEnd_project.Controllers
             {
                 Sliders = context.Sliders.ToList(),
                 Ads = context.Ads.ToList(),
-                Clothes=context.Clothes.Include(c=>c.ClothesImages).ToList(),
-                Category=context.Categories.Include(c=>c.Clothes).ToList()
+                Clothes = context.Clothes.Include(c => c.ClothesImages).ToList(),
+                Category = context.Categories.Include(c => c.Clothes).ToList()
             };
             return View(model);
         }
@@ -49,7 +44,7 @@ namespace MultiShop_BackEnd_project.Controllers
         //            .Where(x => x.CategoryId == category)
         //            .ToPagedList(pageNumber, pageSize);
         //        return PartialView(clothesList);
-                    
+
         //    }
         //    else
         //    {
@@ -58,40 +53,42 @@ namespace MultiShop_BackEnd_project.Controllers
         //    }
         //}
 
-        public ViewResult  List(string category)
-        {
-            string _category = category;
-            IEnumerable<Clothes> clothes;
 
-            string currentCategory = string.Empty;
-            if (string.IsNullOrEmpty(category))
-            {
-                clothes = context.Clothes.OrderBy(c => c.Id);
-                currentCategory = "All clothes";
-            }
-            else
-            {
-                if (string.Equals("Clothes", _category, StringComparison.OrdinalIgnoreCase))
-                {
-                    clothes = context.Clothes.Where(c => c.Category.Name.Equals("Clothes"));
 
-                }
-                else
-                {
-                    clothes = context.Clothes.Where(c => c.Category.Name.Equals("Non-Clothes"));
+        //public ViewResult  List(string category)
+        //{
+        //    string _category = category;
+        //    IEnumerable<Clothes> clothes;
 
-                    currentCategory = _category;
-                }
-                
-            }
-            var clothesListVM = new ClothesListVM
-            {
-                Clothes = clothes.ToList(),
-                //Category = category.ToList()
-            };
-            return View(clothesListVM);
-        }
-       
+        //    string currentCategory = string.Empty;
+        //    if (string.IsNullOrEmpty(category))
+        //    {
+        //        clothes = context.Clothes.OrderBy(c => c.Id);
+        //        currentCategory = "All clothes";
+        //    }
+        //    else
+        //    {
+        //        if (string.Equals("Clothes", _category, StringComparison.OrdinalIgnoreCase))
+        //        {
+        //            clothes = context.Clothes.Where(c => c.Category.Name.Equals("Clothes"));
+
+        //        }
+        //        else
+        //        {
+        //            clothes = context.Clothes.Where(c => c.Category.Name.Equals("Non-Clothes"));
+
+        //            currentCategory = _category;
+        //        }
+
+        //    }
+        //    var clothesListVM = new ClothesListVM
+        //    {
+        //        Clothes = clothes.ToList(),
+        //        //Category = category.ToList()
+        //    };
+        //    return View(clothesListVM);
+        //}
+
 
 
     }

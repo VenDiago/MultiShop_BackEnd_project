@@ -21,7 +21,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (Category category in Model)
+                @foreach (Category category in Model.OrderByDescending(c=>c.Id))
                 {
                     <tr>
                         <td>
