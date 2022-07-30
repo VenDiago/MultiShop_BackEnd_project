@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MultiShop_BackEnd_project.DAL;
+using MultiShop_BackEnd_project.Models;
 using MultiShop_BackEnd_project.Service;
 using System;
 using System.Collections.Generic;
@@ -32,7 +33,7 @@ namespace MultiShop_BackEnd_project
             {
                 opt.UseSqlServer(configuration.GetConnectionString("Default"));
             });
-            services.AddIdentity<IdentityUser, IdentityRole>(opt =>
+            services.AddIdentity<AppUser, IdentityRole>(opt =>
             {
                 opt.Password.RequiredUniqueChars = 3;
                 opt.Password.RequiredLength = 8;

@@ -45,19 +45,20 @@ namespace MultiShop_BackEnd_project.Controllers
                 Email = register.Email
             };
 
-            //IdentityResult result = await _userManager.CreateAsync(user, register.Password);
+            IdentityResult result = await _userManager.CreateAsync(user, register.Password);
 
-            //if (!result.Succeeded)
-            //{
-            //    foreach (IdentityError error in result.Errors)
-            //    {
-            //        ModelState.AddModelError("", error.Description);
-            //    }
-            //    return View();
-            //}
+            if (!result.Succeeded)
+            {
+                foreach (IdentityError error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+                return View();
+            }
             //await _userManager.AddToRoleAsync(user, "Member");
             //return RedirectToAction("Index", "Home");
-            return Json("okay");
+             return RedirectToAction("Index", "Home"); ;
+
         }
 
         public IActionResult Login()
