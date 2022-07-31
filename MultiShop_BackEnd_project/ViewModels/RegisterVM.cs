@@ -21,7 +21,7 @@ namespace MultiShop_BackEnd_project.ViewModels
         [Required, DataType(DataType.Password), Compare(nameof(Password))]
         public string ConfirmPassword { get; set; }
         [Required]
-        public bool? Terms { get; set; }
+        public bool Terms { get; set; }
 
     }
 }

@@ -13,13 +13,13 @@ namespace MultiShop_BackEnd_project.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
+        //private readonly RoleManager<IdentityRole> _roleManager;
 
         public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _roleManager = roleManager;
+            //    _roleManager = roleManager;
         }
         public IActionResult Register()
         {
@@ -31,11 +31,11 @@ namespace MultiShop_BackEnd_project.Controllers
         public async Task<IActionResult> Register(RegisterVM register)
         {
             if (!ModelState.IsValid) return View();
-            //if (!register.Terms)
-            //{
-            //    ModelState.AddModelError("Terms", "Please check our terms and conditions");
-            //    return View();
-            //}
+            if (!register.Terms)
+            {
+                ModelState.AddModelError("Terms", "Please check our terms and conditions");
+                return View();
+            }
 
             AppUser user = new AppUser
             {
@@ -44,6 +44,7 @@ namespace MultiShop_BackEnd_project.Controllers
                 UserName = register.Username,
                 Email = register.Email
             };
+            //return Json("Okay");
 
             IdentityResult result = await _userManager.CreateAsync(user, register.Password);
 
@@ -56,9 +57,7 @@ namespace MultiShop_BackEnd_project.Controllers
                 return View();
             }
             //await _userManager.AddToRoleAsync(user, "Member");
-            //return RedirectToAction("Index", "Home");
-             return RedirectToAction("Index", "Home"); ;
-
+            return RedirectToAction("Index", "Home");
         }
 
         public IActionResult Login()
@@ -66,49 +65,45 @@ namespace MultiShop_BackEnd_project.Controllers
             return View();
         }
 
+        [HttpPost]
+        [AutoValidateAntiforgeryToken]
+        public async Task<IActionResult> Login(LoginVM login)
+        {
+            if (!ModelState.IsValid) return View();
+
+            AppUser user = await _userManager.FindByNameAsync(login.Username);
+            if (user is null) return View();
+
+
+            Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(user, login.Password, login.RememberMe, true);
+            if (!result.Succeeded)
+            {
+                if (result.IsLockedOut)
+                {
+                    ModelState.AddModelError("", "Due to overtrying you have been blocked about 10 minutes");
+                    return View();
+                }
+
+                ModelState.AddModelError("", "Username or password is incorrect");
+                return View();
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
+        public JsonResult ShowAuthentication()
+        {
+            return Json(User.Identity.IsAuthenticated);
+        }
+
+            
 
         
-        //public IActionResult Login()
-        //{
-
-        //    return View();
-        //}
-        //[HttpPost]
-        //[AutoValidateAntiforgeryToken]
-        //public async Task<IActionResult> Login(LoginVM login)
-        //{
-        //    if (!ModelState.IsValid) return View();
-
-        //    AppUser user = await _userManager.FindByNameAsync(login.Username);
-        //    if (user is null) return View();
-
-
-        //    Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(user, login.Password, login.RememberMe, true);
-        //    if (!result.Succeeded)
-        //    {
-        //        if (result.IsLockedOut)
-        //        {
-        //            ModelState.AddModelError("", "Due to overtrying you have been blocked about 10 minutes");
-        //            return View();
-        //        }
-
-        //        ModelState.AddModelError("", "Username or password is incorrect");
-        //        return View();
-        //    }
-
-        //    return RedirectToAction("Index", "Home");
-        //}
-
-        //public async Task<IActionResult> Logout()
-        //{
-        //    await _signInManager.SignOutAsync();
-        //    return RedirectToAction("Index", "Home");
-        //}
-
-        //public JsonResult ShowAuthentication()
-        //{
-        //    return Json(User.Identity.IsAuthenticated);
-        //}
 
         //public async Task CreateRoles()
         //{

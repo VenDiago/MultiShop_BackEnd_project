@@ -42,10 +42,17 @@ namespace MultiShop_BackEnd_project
                 opt.Password.RequireUppercase = false;
                 opt.Password.RequireLowercase = false;
 
+                opt.Lockout.MaxFailedAccessAttempts = 5;
+                opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(18);
+                opt.Lockout.AllowedForNewUsers = true;
+
+
                 opt.User.RequireUniqueEmail = false;
                 opt.User.AllowedUserNameCharacters = "qwertyuiopasdfghjklzxcvbnm1234567890_";
             }).AddDefaultTokenProviders().AddEntityFrameworkStores<AppDbContext>();
             services.AddScoped<LayoutService>();
+
+            services.AddHttpContextAccessor();
 
         }
 
@@ -59,6 +66,8 @@ namespace MultiShop_BackEnd_project
             }
             app.UseRouting();
             app.UseStaticFiles();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

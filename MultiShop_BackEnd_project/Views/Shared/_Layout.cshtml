@@ -43,17 +43,43 @@
             <div class="col-lg-6 text-center text-lg-right">
                 <div class="d-inline-flex align-items-center">
                     <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <button class="dropdown-item" type="button" asp-controller="account" asp-action="login">Sign in</button>
-                            <ul style="text-decoration: none; list-style: none; padding-left: 0; ">
-                                <li style="text-decoration:none; ">
-                                    <a class="dropdown-item" type="button" asp-controller="account" asp-action="register">Sign up</a>
-                                </li>
-                            </ul>
-                            @*<button class="dropdown-item" type="button" asp-controller="account" asp-action="register">Sign up</button>*@
+                        @if (User.Identity.IsAuthenticated == false)
+                        {
+                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Let's Enter</button>
+                            <div class="dropdown-menu dropdown-menu-right">
 
-                        </div>
+                                <ul style="text-decoration: none; list-style: none; padding-left: 0; ">
+                                    <li>
+                                    <li style="text-decoration:none; ">
+                                        <a class="dropdown-item" type="button" asp-controller="account" asp-action="login">Sign in</a>
+                                    </li>
+                                    </li>
+                                    <li style="text-decoration:none; ">
+                                        <a class="dropdown-item" type="button" asp-controller="account" asp-action="register">Sign up</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        }
+                        else
+                        {
+                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <ul style="text-decoration: none; list-style: none; padding-left: 0; ">
+                                    <li style="text-decoration:none; ">
+                                        <a class="dropdown-item" type="button">Account</a>
+                                    </li>
+                                    <li style="text-decoration:none; ">
+                                        <a class="dropdown-item" type="button">Setting</a>
+                                    </li>
+                                    <li style="text-decoration:none; ">
+                                        <a class="dropdown-item" asp-controller="account" asp-action="logout" type="button">Logout</a>
+                                    </li>
+                                </ul>
+
+
+
+                            </div>
+                        }
                     </div>
                     <div class="btn-group mx-2">
                         <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">USD</button>
@@ -167,11 +193,11 @@
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                             <a href="" class="btn px-0">
                                 <i class="fas fa-heart text-primary"></i>
-                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
+                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">1</span>@*WishList*@
                             </a>
                             <a href="" class="btn px-0 ml-3">
                                 <i class="fas fa-shopping-cart text-primary"></i>
-                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
+                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">@(layoutService.GetBasket() != null ? layoutService.GetBasket().BasketCookieItemVMs.Count.ToString() :  "0"  ) </span>@*Basket*@
                             </a>
                         </div>
                     </div>
