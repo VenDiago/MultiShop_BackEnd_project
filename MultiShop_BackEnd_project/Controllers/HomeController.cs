@@ -26,6 +26,12 @@ namespace MultiShop_BackEnd_project.Controllers
             return View(model);
         }
 
+
+        public IActionResult Contact()
+        {
+            return View();
+        }
+
         //public List<Clothes> GetClothesList()
         //{
         //    var clothes = context.Clothes.OrderByDescending(x => x.Id).ToList();
@@ -52,8 +58,6 @@ namespace MultiShop_BackEnd_project.Controllers
         //        return PartialView(clothesList);
         //    }
         //}
-
-
 
         //public ViewResult  List(string category)
         //{

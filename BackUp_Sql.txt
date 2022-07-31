@@ -1,0 +1,87 @@
+<Slider>
+1	carousel-1.jpg	Men Fashion	Lorem rebum magna amet lorem magna erat diam stet. Sadips duo stet amet amet ndiam elitr ipsum diam	Shop now	1
+2	carousel-2.jpg	Woman Fashion	Lorem rebum magna amet lorem magna erat diam stet. Sadips duo stet amet amet ndiam elitr ipsum diam	Shop now	2
+3	carousel-3.jpg	Kids Fashion	Lorem rebum magna amet lorem magna erat diam stet. Sadips duo stet amet amet ndiam elitr ipsum diam	Shop now	3
+NULL	NULL	NULL	NULL	NULL	NULL
+
+
+<Settings>
+1	HeaderLogo	Multi
+2	HeaderLogo2	Shop
+3	PhoneNumber	+99450XX00XX
+4	GmailAddress	info@example.com
+5	Address	123 Street, New York, USA
+NULL	NULL	NULL
+
+
+<ClothesInfo>
+1	Eos no lorem eirmod diam diam, eos elitr et gubergren diam sea. Consetetur vero aliquyam invidunt duo dolores et duo sit. Vero diam ea vero et dolore rebum, dolor rebum eirmod consetetur invidunt sed sed et, lorem duo et eos elitr, sadipscing kasd ipsum rebum diam. Dolore diam stet rebum sed tempor kasd eirmod. Takimata kasd ipsum accusam sadipscing, eos dolores sit no ut diam consetetur duo justo est, sit sanctus diam tempor aliquyam eirmod nonumy rebum dolor accusam, ipsum kasd eos consetetur at sit rebum, diam kasd invidunt tempor lorem, ipsum lorem elitr sanctus eirmod takimata dolor ea invidunt.	Eos no lorem eirmod diam diam, eos elitr et gubergren diam sea. Consetetur vero aliquyam invidunt duo dolores et duo sit. Vero diam ea vero et dolore rebum, dolor rebum eirmod consetetur invidunt sed sed et, lorem duo et eos elitr, sadipscing kasd ipsum rebum diam. Dolore diam stet rebum sed tempor kasd eirmod. Takimata kasd ipsum accusam sadipscing, eos dolores sit no ut diam consetetur duo justo est, sit sanctus diam tempor aliquyam eirmod nonumy rebum dolor accusam, ipsum kasd eos consetetur at sit rebum, diam kasd invidunt tempor lorem, ipsum lorem elitr sanctus eirmod takimata dolor ea invidunt.
+
+
+<ClothesImage>
+1	adidas-1.jpg	Adidas-shoe	True	1
+2	adidas-1.jpg	Adidas-shoe	False	1
+3	nike-3.jpg	Nike-shoe	True	2
+4	nike-3.jpg	Nike-shoe	False	2
+5	nike-4.jpg	Nike-shoe	True	3
+6	nike-4.jpg	Nike-shoe	False	3
+7	adidas-2.jpg	Adidas-shoe	True	4
+8	adidas-2.jpg	Adidas-shoe	False	4
+9	armani-1.jpg	Armani-T-shirt	True	5
+10	armani-1.jpg	Armani-T-shirt	False	5
+11	armani-2.jpg	Armani-T-shirt	True	6
+12	armani-2.jpg	Armani-T-shirt	False	6
+13	armani-3.jpg	Armani-T-shirt	True	7
+14	armani-3.jpg	Armani-T-shirt	False	7
+15	armani-4.jpg	Armani-T-shirt	True	8
+16	armani-4.jpg	Armani-T-shirt	False	8
+17	armani-jeans-blu.jpg	Armani-Jeans	True	9
+18	armani-jeans-blu.jpg	Armani-Jeans	False	9
+19	armanijeans-black.jpg	Armani-jeans	True	10
+20	armanijeans-black.jpg	Armani-jeans	False	10
+21	armaniwhite.jpg	Armani-jeans	True	11
+22	armaniwhite.jpg	Armani-jeans	False	11
+23	armani-gray.jpg	Armani-jeans	True	12
+24	armani-gray.jpg	Armani-jeans	False	12
+25	th-cap-1.jpg	TommyHilfiger-caps	True	13
+26	th-cap-1.jpg	TommyHilfiger-caps	False	13
+27	th-white-2.jpg	TommyHilfiger	True	14
+28	th-white-2.jpg	TommyHilfiger	False	14
+29	th-gray-3.jpg	TommyHilfiger	True	15
+30	th-gray-3.jpg	TommyHilfiger	False	15
+31	th-blue-4.jpg	TommyHilfiger	True	16
+32	th-blue-4.jpg	TommyHilfiger	False	16
+NULL	NULL	NULL	NULL	NULL
+
+
+<Clothes>
+1	Adidas Shoe	150.00	Volup erat ipsum diam elitr rebum et dolor. Est nonumy elitr erat diam stet sit clita ea. Sanc ipsum et, labore clita lorem magna duo dolor no sea	XXL	Black	Shoe	20	1	1	299.00
+2	NIke Shoe	550.00	none	XXL	Red	Shoe	10	1	1	699.00
+3	Nike Shoe	350.00	none	XL	White	Shoe	10	1	1	499.00
+4	Adidas Shoe	250.00	none	XL	White	Shoe	10	1	1	299.00
+5	Armani T-shirt	150.00	none	XL	Blue	T-shirt	7	1	2	299.00
+6	Armani T-shirt	499.00	none	X	Black	T-shirt	5	1	2	599.00
+7	Armani T-shirt	120.00	none	XLL	White	T-shirt	5	1	2	299.00
+8	Armani T-shirt	399.00	none	XLL	Red	T-shirt	20	1	2	599.00
+9	Armani Jeans	200.00	Slim body	X	Blue	Jeans	15	1	3	399.00
+10	Armani Jeans	200.00	Slim body	X	Black	Jeans	15	1	3	399.00
+11	Armani Jeans	300.00	Slim body	X	Black	Jeans	10	1	3	499.00
+12	Armani Jeans	300.00	Slim body	X	Gray	Jeans	10	1	3	499.00
+13	Tommy Hilfiger Caps	500.00	TH caps	X	Black	Caps	15	1	4	550.00
+14	Tommy Hilfiger Caps	120.00	TH caps	X	White	Caps	15	1	4	550.00
+15	Tommy Hilfiger Caps	140.00	TH caps	X	Grey	Caps	15	1	4	550.00
+16	Tommy Hilfiger Caps	110.00	TH caps	X	Blue	Caps	15	1	4	550.00
+NULL	NULL	NULL	NULL	NULL	NULL	NULL	NULL	NULL	NULL	NULL
+
+
+<Categories>
+1	Shoes	adidas-1.jpg
+2	T-shirts	armani-1.jpg
+3	Trousers	armani-jeans-blu.jpg
+4	Hats	th-cap-1.jpg
+NULL	NULL	NULL
+
+<Ads>
+1	offer-1.jpg	SAVE 20%	Special Offer	Shop Now	1
+2	offer-2.jpg	SAVE 20%	Special Offer	Shop Now	2
+NULL	NULL	NULL	NULL	NULL	NULL
